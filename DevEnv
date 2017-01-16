@@ -54,7 +54,7 @@ if [ $MYUNAME = "Darwin" ]; then
     ###########################################################################
     export CLANG_DIR="$CLANG_TC_DIR/usr"
     ###########################################################################
-    export CLANG_SDK_DIR="$CLANG_DEV_DIR/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk"
+    export CLANG_SDK_DIR="$CLANG_DEV_DIR/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
     ###########################################################################
     export PERL5LIB="$CODE_TOP/Scripts"
     ###########################################################################
