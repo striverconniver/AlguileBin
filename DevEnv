@@ -90,7 +90,7 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 ###############################################################################
 if [ $MYUNAME = "Darwin" ]; then
     OCTAVE_PATH="/usr/local/octave/3.8.0/bin"
-    export PATH="/Users/subhashis/node_modules/http-server/bin:/usr/local/bin:$OCTAVE_PATH:/Users/subhashis/GIT/AWS/data/bin:$PATH"
+    export PATH="/Users/$USERNAME/node_modules/http-server/bin:/usr/local/bin:$OCTAVE_PATH:/Users/$USERNAME/GIT/AWS/data/bin:$PATH"
 fi
 ###############################################################################
 source $MYRCDIR/set_pre_path
