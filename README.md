@@ -1,0 +1,2 @@
+# AlguileBin
+Scripts directory
