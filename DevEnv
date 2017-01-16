@@ -1,0 +1,105 @@
+###############################################################################
+if [ $# -lt 3 ]
+    then
+        echo "Usage: DevEnv <CLANG_VER> <BLD_TYPE> <APP_NAME> [<GCCDIR> <GCCHOST> <GCCVER>]"
+        sleep 2
+        echo "Goodbye" 
+        sleep 2
+        exit
+fi
+###############################################################################
+export CHKLOC=""
+if [ $# -eq 2 ]
+    then
+        CHKLOC="y"
+else
+        CHKLOC="n"
+fi      
+###############################################################################
+# This script should ONLY at the top level of our repository - i.e. in
+# the local directory which has Scripts etc.
+###############################################################################
+export MYUNAME=`uname -s`
+export MYPTYPE=`uname -p`
+###############################################################################
+if [ ! -d Scripts ]
+    then
+        if [ $CHKLOC = "y" ]
+            then
+                echo "Ignoring location from which we are being run."
+        else
+            echo "You need to 'source' this script in the top level directory."
+            echo "The top level directory has Scripts etc."
+            sleep 2
+            exit
+        fi
+fi
+###############################################################################
+export CODE_TOP=`pwd`
+LONGSTEM=`expr $CODE_TOP : '.*\(\/.*\)'`
+THELEN=${#LONGSTEM}
+STEM="${LONGSTEM:1:$THELEN-1}"
+###############################################################################
+export CLANG_VER=$1
+###############################################################################
+if [ $MYUNAME = "Darwin" ]; then
+    ###########################################################################
+    export TGTARCH="x64-darwin-macos"
+    ###########################################################################
+    export LATEX_DIR="/Library/TeX/texbin"
+    ###########################################################################
+    export CLANG_DEV_DIR="/Applications/Xcode.app/Contents/Developer"
+    ###########################################################################
+    export CLANG_TC_DIR="$CLANG_DEV_DIR/Toolchains/XcodeDefault.xctoolchain"
+    ###########################################################################
+    export CLANG_DIR="$CLANG_TC_DIR/usr"
+    ###########################################################################
+    export CLANG_SDK_DIR="$CLANG_DEV_DIR/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk"
+    ###########################################################################
+    export PERL5LIB="$CODE_TOP/Scripts"
+    ###########################################################################
+elif [ $MYUNAME = "Linux" ]; then
+    ###########################################################################
+    export GCCDIR="$4"
+    export GCCHOST="$5"
+    export GCCVER="$6"
+    ###########################################################################
+    export TGTARCH="x64-linux"
+    export LATEX_DIR="/usr/bin"
+    export CLANG_DIR="/usr"
+    export CLANG_SDK_DIR="LINUX_DONT_USE"
+    if [ $MYPTYPE = "x86_64" ]
+    then
+        export GCCHOST=x86_64-redhat-linux
+        export PERL5LIB=$CODE_TOP/Scripts:/usr/lib64/perl5:$PERL5LIB
+    else
+        export GCCHOST=i686-pc-linux-gnu
+        export PERL5LIB=$CODE_TOP/Scripts:/usr/lib/perl5:$PERL5LIB
+    fi
+fi
+###############################################################################
+alias gctop="cd $CODE_TOP"
+###############################################################################
+
+###############################################################################
+GOPATH=$CODE_TOP/go
+###############################################################################
+export PATH="$CODE_TOP/PScripts:$CODE_TOP/Scripts:$GOPATH/bin:$HOME/GIT/go/bin:/usr/local/git/bin:/usr/texbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin:/Library/TeX/texbin"
+###############################################################################
+export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+###############################################################################
+if [ $MYUNAME = "Darwin" ]; then
+    OCTAVE_PATH="/usr/local/octave/3.8.0/bin"
+    export PATH="/Users/subhashis/node_modules/http-server/bin:/usr/local/bin:$OCTAVE_PATH:/Users/subhashis/GIT/AWS/data/bin:$PATH"
+fi
+###############################################################################
+source $MYRCDIR/set_pre_path
+###############################################################################
+
+###############################################################################
+if [ $MYUNAME = "Linux" ]; then
+    source Scripts/shlibs.x64-linux $2 $3
+elif [ $MYUNAME = "Darwin" ]; then
+    source Scripts/shlibs.x64-darwin-macos $2 $3
+fi
+###############################################################################

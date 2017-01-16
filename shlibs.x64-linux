@@ -1,0 +1,42 @@
+if [ $# -ne 2 ]
+  then
+    echo "Usage: $0 {dbg|rel} {DSCoreTester|...}"
+    echo "Will exit shell in 10 seconds. Sorry you have to start a new shell!"
+    sleep 10
+    exit
+fi
+###############################################################################
+XX="External/Lib/x64-linux"
+###############################################################################
+if [ $1 = "dbg" ]
+  then
+    LOC=$XX/Debug
+elif [ $1 = "rel" ]
+  then
+    LOC=$XX/Release
+else
+    echo "Usage: $0 {dbg|rel} {DSCoreTester|...}"
+    echo "Will exit shell in 10 seconds. Sorry you have to start a new shell!"
+    sleep 10
+    exit
+fi
+###############################################################################
+LD_LIBRARY_PATH=""
+###############################################################################
+LIBS="DSAssertLib DSMongoDBLib"
+###############################################################################
+for LIB in $LIBS
+do
+    for DIR in $CODE_TOP/Lib/XPlat/$LIB/$LOC
+    do
+        export LD_LIBRARY_PATH=$DIR:$LD_LIBRARY_PATH
+    done
+done
+###############################################################################
+export LD_LIBRARY_PATH=$BLD_LOC/mongo-c/lib:$LD_LIBRARY_PATH
+###############################################################################
+DIR=$CODE_TOP/Apps/X64/$2/$LOC
+###############################################################################
+export LD_LIBRARY_PATH=$DIR:$LD_LIBRARY_PATH
+###############################################################################
+
