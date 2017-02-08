@@ -22,14 +22,14 @@ fi
 export MYUNAME=`uname -s`
 export MYPTYPE=`uname -p`
 ###############################################################################
-if [ ! -d Scripts ]
+if [ ! -d AlguileBin ]
     then
         if [ $CHKLOC = "y" ]
             then
                 echo "Ignoring location from which we are being run."
         else
             echo "You need to 'source' this script in the top level directory."
-            echo "The top level directory has Scripts etc."
+            echo "The top level directory has AlguileBin etc."
             sleep 2
             exit
         fi
@@ -56,7 +56,7 @@ if [ $MYUNAME = "Darwin" ]; then
     ###########################################################################
     export CLANG_SDK_DIR="$CLANG_DEV_DIR/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
     ###########################################################################
-    export PERL5LIB="$CODE_TOP/Scripts"
+    export PERL5LIB="$CODE_TOP/AlguileBin"
     ###########################################################################
 elif [ $MYUNAME = "Linux" ]; then
     ###########################################################################
@@ -71,10 +71,10 @@ elif [ $MYUNAME = "Linux" ]; then
     if [ $MYPTYPE = "x86_64" ]
     then
         export GCCHOST=x86_64-redhat-linux
-        export PERL5LIB=$CODE_TOP/Scripts:/usr/lib64/perl5:$PERL5LIB
+        export PERL5LIB=$CODE_TOP/AlguileBin:/usr/lib64/perl5:$PERL5LIB
     else
         export GCCHOST=i686-pc-linux-gnu
-        export PERL5LIB=$CODE_TOP/Scripts:/usr/lib/perl5:$PERL5LIB
+        export PERL5LIB=$CODE_TOP/AlguileBin:/usr/lib/perl5:$PERL5LIB
     fi
 fi
 ###############################################################################
@@ -84,7 +84,7 @@ alias gctop="cd $CODE_TOP"
 ###############################################################################
 GOPATH=$CODE_TOP/go
 ###############################################################################
-export PATH="$CODE_TOP/PScripts:$CODE_TOP/Scripts:$GOPATH/bin:$HOME/GIT/go/bin:/usr/local/git/bin:/usr/texbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin:/Library/TeX/texbin"
+export PATH="$CODE_TOP/PAlguileBin:$CODE_TOP/AlguileBin:$GOPATH/bin:$HOME/GIT/go/bin:/usr/local/git/bin:/usr/texbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin:/Library/TeX/texbin"
 ###############################################################################
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 ###############################################################################
@@ -98,8 +98,8 @@ source $MYRCDIR/set_pre_path
 
 ###############################################################################
 if [ $MYUNAME = "Linux" ]; then
-    source Scripts/shlibs.x64-linux $2 $3
+    source AlguileBin/shlibs.x64-linux $2 $3
 elif [ $MYUNAME = "Darwin" ]; then
-    source Scripts/shlibs.x64-darwin-macos $2 $3
+    source AlguileBin/shlibs.x64-darwin-macos $2 $3
 fi
 ###############################################################################
