@@ -1,6 +1,6 @@
 if [ $# -ne 2 ]
   then
-    echo "Usage: $0 {dbg|rel} {DSCoreTester|...}"
+    echo "Usage: $0 {dbg|rel} {AlExtTester|...}"
     echo "Will exit shell in 10 seconds. Sorry you have to start a new shell!"
     sleep 10
     exit
@@ -15,7 +15,7 @@ elif [ $1 = "rel" ]
   then
     LOC=$XX/Release
 else
-    echo "Usage: $0 {dbg|rel} {DSCoreTester|...}"
+    echo "Usage: $0 {dbg|rel} {AlExtTester|...}"
     echo "Will exit shell in 10 seconds. Sorry you have to start a new shell!"
     sleep 10
     exit
@@ -23,7 +23,7 @@ fi
 ###############################################################################
 DYLD_LIBRARY_PATH=""
 ###############################################################################
-EXT_LIBS="DSBaseLib DSMongoDBLib"
+EXT_LIBS="AlBaseLib"
 LIBS=
 ###############################################################################
 for LIB in $EXT_LIBS
@@ -41,8 +41,6 @@ do
         export DYLD_LIBRARY_PATH=$DIR:$DYLD_LIBRARY_PATH
     done
 done
-###############################################################################
-export DYLD_LIBRARY_PATH=$BLD_LOC/mongo-c/lib:$DYLD_LIBRARY_PATH
 ###############################################################################
 DIR=$CODE_TOP/Apps/X64/$2/$LOC
 ###############################################################################
