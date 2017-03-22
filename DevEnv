@@ -67,7 +67,7 @@ elif [ $MYUNAME = "Linux" ]; then
     export TGTARCH="x64-linux"
     export LATEX_DIR="/usr/bin"
     export CLANG_DIR="/usr"
-    export CLANG_SDK_DIR="LINUX_DONT_USE"
+    export CLANG_SDK_DIR="/usr/lib/clang/$CLANG_VER"
     if [ $MYPTYPE = "x86_64" ]
     then
         export GCCHOST=x86_64-redhat-linux
