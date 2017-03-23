@@ -1,0 +1,23 @@
+#!/bin/bash
+cd $1
+#echo 1=$1 # AR_DST_D
+#echo 2=$2 # SHR_LIBD
+#echo 3=$3 # SHR_STEM
+#echo 4=$4 # ARCHIVE
+#echo 5=$5 # {DEBUG|RELEASE}
+#echo 6=$6 # CXX
+#
+echo
+if [ $5 = "DEBUG" ]
+then
+    WEARE="d"
+elif [ $5 = "RELEASE" ]
+then
+    WEARE="r"
+else
+    echo "ERROR: Do not recognize build type!"
+    exit
+fi
+$6 -m64 -shared -o $3.$WEARE.so.1.0 -Wl,--whole-archive,-soname,$3.$WEARE.so.1 $4 -Wl,--no-whole-archive
+ln -sf $2 $3.$WEARE.so
+ln -sf $2 $3.$WEARE.so.1
