@@ -84,7 +84,7 @@ alias gctop="cd $CODE_TOP"
 ###############################################################################
 GOPATH=$CODE_TOP/go
 ###############################################################################
-export PATH="$CODE_TOP/PAlguileBin:$CODE_TOP/AlguileBin:$GOPATH/bin:$HOME/GIT/go/bin:/usr/local/git/bin:/usr/texbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin:/Library/TeX/texbin"
+export PATH="$CODE_TOP/AlguileBin:$GOPATH/bin:$HOME/GIT/go/bin:/usr/local/git/bin:/usr/texbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/MacGPG2/bin:/Library/TeX/texbin"
 ###############################################################################
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 ###############################################################################
